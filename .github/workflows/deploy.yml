@@ -1,34 +1,28 @@
-name: Deploy to VPS 
+name: CI/CD Auto Deploy to VPS
 
 on:
   push:
     branches:
-      - main # Jalankan otomatisasi hanya jika ada push ke branch main
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Deploy via SSH
-        uses: appleboy/ssh-action@v0.1.5
+      - name: Deploy to VPS via SSH
+        uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ${{ secrets.VPS_HOST }}       # IP VPS lo (disembunyikan)
-          username: ${{ secrets.VPS_USER }}   # Username root (disembunyikan)
-          key: ${{ secrets.VPS_SSH_PASSWORD }} # SSH Privat Key lo (disembunyikan)
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          password: ${{ secrets.VPS_PASSWORD }}
           port: 22
           script: |
-            
-            cd /home/azzhzmaa/UAS-WEB-DEPLOYMENT
-            
-            
+           
+            cd ~/UAS-WEB-DEPLOYMENT
+
             git reset --hard origin/main
-            
-            
             git pull origin main
-            
-            
             docker compose up -d --build
