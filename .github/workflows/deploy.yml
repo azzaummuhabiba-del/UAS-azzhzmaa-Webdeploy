@@ -22,7 +22,7 @@ jobs:
           port: 22
           script: |
             
-            cd /home/azzhzmaa/UAS WEB DEPLOYMENT
+            cd /home/azzhzmaa/UAS-WEB-DEPLOYMENT
             
             
             git reset --hard origin/main
