@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💸 Rekapan Keuangan Cantikku</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --rose: #f4a7b9;
+            --rose-light: #fde8ee;
+            --rose-deep: #e8728a;
+            --lavender: #c9b8e8;
+            --lavender-light: #f0ebfa;
+            --sage: #a8c5a0;
+            --sage-light: #e8f4e6;
+            --cream: #fdf6ee;
+            --gold: #d4a843;
+            --gold-light: #fdf3dc;
+            --text: #4a3f4a;
+            --text-light: #8a7a8a;
+            --white: #ffffff;
+            --shadow: 0 8px 32px rgba(180, 120, 140, 0.13);
+            --shadow-sm: 0 2px 12px rgba(180, 120, 140, 0.10);
+            --radius: 20px;
+            --radius-sm: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--cream);
+            color: var(--text);
+            min-height: 100vh;
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(244, 167, 185, 0.18) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(201, 184, 232, 0.18) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(168, 197, 160, 0.10) 0%, transparent 60%);
+        }
+
+        .screen {
+            display: none;
+            min-height: 100vh;
+        }
+
+        .screen.active {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        /* === DECO FLOWERS === */
+        .deco {
+            position: fixed;
+            pointer-events: none;
+            font-size: 2rem;
+            opacity: 0.18;
+            z-index: 0;
+        }
+
+        .deco-1 {
+            top: 3%;
+            left: 2%;
+            font-size: 3rem;
+        }
+
+        .deco-2 {
+            top: 8%;
+            right: 4%;
+            font-size: 2.5rem;
+        }
+
+        .deco-3 {
+            bottom: 5%;
+            left: 5%;
+            font-size: 2.8rem;
+        }
+
+        .deco-4 {
+            bottom: 10%;
+            right: 3%;
+            font-size: 2.2rem;
+        }
+
+        .deco-5 {
+            top: 50%;
+            left: 1%;
+            font-size: 2rem;
+        }
+
+        .deco-6 {
+            top: 40%;
+            right: 1%;
+            font-size: 1.8rem;
+        }
+
+        /* === CARD === */
+        .card {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 40px;
+            width: 100%;
+            max-width: 560px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-wide {
+            max-width: 900px;
+        }
+
+        /* === ONBOARDING === */
+        .logo {
+            font-size: 3rem;
+            margin-bottom: 8px;
+        }
+
+        .title-main {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--rose-deep);
+            margin-bottom: 6px;
+            text-align: center;
+        }
+
+        .subtitle {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            text-align: center;
+            margin-bottom: 28px;
+            line-height: 1.6;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--rose-deep);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 13px 16px;
+            border: 2px solid var(--rose-light);
+            border-radius: var(--radius-sm);
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            color: var(--text);
+            background: var(--cream);
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: var(--rose);
+            box-shadow: 0 0 0 3px rgba(244, 167, 185, 0.2);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--rose-deep), var(--lavender));
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            letter-spacing: 0.5px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 16px rgba(232, 114, 138, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(232, 114, 138, 0.35);
+        }
+
+        .btn-sm {
+            width: auto;
+            padding: 9px 20px;
+            font-size: 0.85rem;
+            border-radius: 50px;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--rose-deep);
+            color: var(--rose-deep);
+            box-shadow: none;
+        }
+
+        .btn-outline:hover {
+            background: var(--rose-light);
+        }
+
+        .btn-gold {
+            background: linear-gradient(135deg, var(--gold), #e8c068);
+            box-shadow: 0 4px 16px rgba(212, 168, 67, 0.3);
+        }
+
+        /* === DASHBOARD === */
+        .dashboard-header {
+            text-align: center;
+            margin-bottom: 32px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .greeting {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--rose-deep);
+            margin-bottom: 4px;
+        }
+
+        .year-badge {
+            background: linear-gradient(135deg, var(--rose-deep), var(--lavender));
+            color: white;
+            padding: 6px 20px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+
+        .motivation-bar {
+            background: var(--lavender-light);
+            border-left: 4px solid var(--lavender);
+            padding: 12px 18px;
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+            font-size: 0.88rem;
+            color: #6a5a8a;
+            font-style: italic;
+            margin-bottom: 28px;
+            max-width: 700px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .months-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 16px;
+            width: 100%;
+            max-width: 900px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .month-card {
+            background: var(--white);
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow-sm);
+            padding: 22px 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.25s, box-shadow 0.25s;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .month-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--rose), var(--lavender), var(--sage));
+        }
+
+        .month-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 32px rgba(180, 120, 140, 0.2);
+            border-color: var(--rose-light);
+        }
+
+        .month-card.has-data {
+            background: var(--rose-light);
+        }
+
+        .month-emoji {
+            font-size: 1.8rem;
+            margin-bottom: 6px;
+        }
+
+        .month-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--text);
+        }
+
+        .month-sisa {
+            font-size: 0.75rem;
+            color: var(--sage);
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
+        .month-sisa.minus {
+            color: var(--rose-deep);
+        }
+
+        .nav-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 0 24px;
+            width: 100%;
+            max-width: 900px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: var(--rose-deep);
+        }
+
+        .nav-right {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        /* === MONTH DETAIL === */
+        .month-screen {
+            padding: 20px;
+            align-items: flex-start;
+        }
+
+        .month-screen .card-wide {
+            max-width: 980px;
+            padding: 32px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: var(--rose-deep);
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px dashed var(--rose-light);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 14px;
+            margin-bottom: 28px;
+        }
+
+        .summary-box {
+            padding: 16px;
+            border-radius: var(--radius-sm);
+            text-align: center;
+        }
+
+        .summary-box.income {
+            background: var(--sage-light);
+            border: 1.5px solid var(--sage);
+        }
+
+        .summary-box.expense {
+            background: var(--rose-light);
+            border: 1.5px solid var(--rose);
+        }
+
+        .summary-box.emergency {
+            background: var(--gold-light);
+            border: 1.5px solid var(--gold);
+        }
+
+        .summary-box.saving {
+            background: var(--lavender-light);
+            border: 1.5px solid var(--lavender);
+        }
+
+        .summary-box.sisa {
+            background: var(--cream);
+            border: 1.5px solid var(--rose-deep);
+        }
+
+        .summary-box label {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            margin-bottom: 6px;
+        }
+
+        .summary-box .amount {
+            font-size: 1.1rem;
+            font-weight: 700;
+            font-family: 'Playfair Display', serif;
+            color: var(--text);
+        }
+
+        .summary-box.sisa .amount {
+            color: var(--rose-deep);
+            font-size: 1.3rem;
+        }
+
+        .monthly-inputs {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 14px;
+            margin-bottom: 28px;
+        }
+
+        .input-box {
+            padding: 16px;
+            background: var(--cream);
+            border-radius: var(--radius-sm);
+            border: 1.5px solid var(--rose-light);
+        }
+
+        .input-box label {
+            margin-bottom: 8px;
+        }
+
+        .input-box input {
+            background: white;
+        }
+
+        /* Days table */
+        .days-section {
+            margin-bottom: 28px;
+        }
+
+        .days-table-wrap {
+            overflow-x: auto;
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow-sm);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 0.85rem;
+        }
+
+        thead tr {
+            background: linear-gradient(135deg, var(--rose-deep), var(--lavender));
+            color: white;
+        }
+
+        th {
+            padding: 12px 8px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        td {
+            padding: 8px 6px;
+            text-align: center;
+            border-bottom: 1px solid var(--rose-light);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:nth-child(even) td {
+            background: var(--rose-light);
+        }
+
+        .day-num {
+            font-weight: 600;
+            color: var(--rose-deep);
+        }
+
+        .day-input {
+            border: 1.5px solid var(--rose-light);
+            border-radius: 8px;
+            padding: 5px 6px;
+            width: 100px;
+            font-size: 0.82rem;
+            text-align: right;
+            background: white;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .day-input:focus {
+            border-color: var(--rose);
+            outline: none;
+        }
+
+        .day-ket {
+            border: 1.5px solid var(--rose-light);
+            border-radius: 8px;
+            padding: 5px 8px;
+            width: 130px;
+            font-size: 0.78rem;
+            background: white;
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-light);
+        }
+
+        .day-ket:focus {
+            border-color: var(--lavender);
+            outline: none;
+            color: var(--text);
+        }
+
+        .day-sisa {
+            font-weight: 600;
+        }
+
+        .day-sisa.pos {
+            color: var(--sage);
+        }
+
+        .day-sisa.neg {
+            color: var(--rose-deep);
+        }
+
+        /* Reward & barang */
+        .reward-barang {
+            margin-bottom: 28px;
+        }
+
+        .reward-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .reward-box {
+            padding: 18px;
+            border-radius: var(--radius-sm);
+        }
+
+        .reward-box.reward {
+            background: var(--lavender-light);
+            border: 1.5px solid var(--lavender);
+        }
+
+        .reward-box.barang {
+            background: var(--gold-light);
+            border: 1.5px solid var(--gold);
+        }
+
+        .reward-box label {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: #6a5a8a;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .reward-box input,
+        .reward-box textarea {
+            background: white;
+            margin-top: 6px;
+        }
+
+        /* Catatan */
+        .notes-box {
+            background: var(--cream);
+            padding: 18px;
+            border-radius: var(--radius-sm);
+            border: 1.5px solid var(--rose-light);
+            margin-bottom: 28px;
+        }
+
+        /* Appreciation */
+        .appreciation {
+            background: linear-gradient(135deg, var(--rose-light), var(--lavender-light));
+            border-radius: var(--radius-sm);
+            padding: 18px 22px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .appreciation .emoji {
+            font-size: 1.5rem;
+        }
+
+        .appreciation p {
+            font-size: 0.88rem;
+            color: #6a5a8a;
+            font-style: italic;
+            margin-top: 4px;
+        }
+
+        .save-area {
+            text-align: center;
+        }
+
+        /* === REKAP === */
+        .rekap-card {
+            background: white;
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow-sm);
+            padding: 20px;
+            margin-bottom: 14px;
+        }
+
+        .rekap-month-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px dashed var(--rose-light);
+        }
+
+        .rekap-month-row:last-child {
+            border-bottom: none;
+        }
+
+        .rekap-month-name {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+        }
+
+        .rekap-amounts {
+            display: flex;
+            gap: 16px;
+            font-size: 0.82rem;
+        }
+
+        .rekap-amounts span {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .rekap-amounts span small {
+            color: var(--text-light);
+            font-size: 0.72rem;
+        }
+
+        .rekap-total {
+            background: linear-gradient(135deg, var(--rose-deep), var(--lavender));
+            color: white;
+            padding: 20px;
+            border-radius: var(--radius-sm);
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .rekap-total .big-amount {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .rekap-total p {
+            font-size: 0.85rem;
+            opacity: 0.85;
+            margin-top: 4px;
+        }
+
+        /* toast */
+        #toast {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--rose-deep);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            box-shadow: 0 4px 20px rgba(232, 114, 138, 0.35);
+            opacity: 0;
+            transition: opacity 0.4s;
+            z-index: 999;
+            pointer-events: none;
+        }
+
+        #toast.show {
+            opacity: 1;
+        }
+
+        @media(max-width:600px) {
+            .card {
+                padding: 24px 18px;
+            }
+
+            .months-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .reward-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .rekap-amounts {
+                gap: 8px;
+            }
+
+            .month-screen .card-wide {
+                padding: 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- DEKORASI -->
+    <div class="deco deco-1">🌸</div>
+    <div class="deco deco-2">✨</div>
+    <div class="deco deco-3">🌿</div>
+    <div class="deco deco-4">💫</div>
+    <div class="deco deco-5">🌺</div>
+    <div class="deco deco-6">🍃</div>
+    <div id="toast"></div>
+
+    <!-- ====== SCREEN 1: ONBOARDING ====== -->
+    <div id="screen-onboarding" class="screen active">
+        <div class="card">
+            <div style="text-align:center;margin-bottom:24px">
+                <div class="logo">💸</div>
+                <div class="title-main">Catatan Keuanganku</div>
+                <div class="subtitle">Yuk, kenalan dulu sebelum kita mulai<br>mencatat perjalanan finansialmu~ 🌸</div>
+            </div>
+            <div class="form-group">
+                <label>🌷 Nama Kamu</label>
+                <input type="text" id="inp-nama" placeholder="Nama cantikmu disini...">
+            </div>
+            <div class="form-group">
+                <label>🎂 Umur</label>
+                <input type="number" id="inp-umur" placeholder="Berapa tahun?" min="1">
+            </div>
+            <div class="form-group">
+                <label>🎯 Tujuan / Goals Keuangan</label>
+                <textarea id="inp-goals"
+                    placeholder="Misal: Nabung buat liburan ke Jepang, beli laptop baru, bebas hutang..."></textarea>
+            </div>
+            <div class="form-group">
+                <label>💪 Motivasi Dirimu</label>
+                <textarea id="inp-motivasi" placeholder="Kata-kata penyemangat dari kamu untuk kamu..."
+                    style="min-height:70px"></textarea>
+            </div>
+            <button class="btn" onclick="startApp()">Mulai Perjalananku ✨</button>
+        </div>
+    </div>
+
+    <!-- ====== SCREEN 2: DASHBOARD ====== -->
+    <div id="screen-dashboard" class="screen">
+        <div class="nav-bar">
+            <div class="greeting" id="dash-greeting">Hai! 🌸</div>
+            <div class="nav-right">
+                <div class="year-badge" id="dash-year">2025</div>
+                <button class="btn btn-sm btn-gold" onclick="showRekap()">📊 Rekap Tahunan</button>
+                <button class="btn btn-sm btn-outline" onclick="editProfile()">✏️ Edit Profil</button>
+            </div>
+        </div>
+        <div class="motivation-bar" id="dash-motivation"></div>
+        <div class="months-grid" id="months-grid"></div>
+    </div>
+
+    <!-- ====== SCREEN 3: DETAIL BULAN ====== -->
+    <div id="screen-month" class="screen month-screen">
+        <div style="width:100%;max-width:980px;position:relative;z-index:1">
+            <div class="nav-bar">
+                <button class="btn btn-sm btn-outline" onclick="showDashboard()">← Kembali</button>
+                <div class="nav-title" id="month-title">Januari 2025</div>
+                <button class="btn btn-sm" onclick="saveMonth()">💾 Simpan</button>
+            </div>
+        </div>
+        <div class="card card-wide">
+            <!-- Appreciation -->
+            <div class="appreciation" id="month-appreciation">
+                <div class="emoji">🌸</div>
+                <p id="appreciation-text">Setiap rupiah yang kamu catat adalah langkah menuju impianmu!</p>
+            </div>
+
+            <!-- Summary boxes -->
+            <div class="section-title">📈 Ringkasan Bulan Ini</div>
+            <div class="summary-grid">
+                <div class="summary-box income">
+                    <label>💚 Total Pemasukan</label>
+                    <div class="amount" id="sum-income">Rp 0</div>
+                </div>
+                <div class="summary-box expense">
+                    <label>🛍️ Total Pengeluaran</label>
+                    <div class="amount" id="sum-expense">Rp 0</div>
+                </div>
+                <div class="summary-box emergency">
+                    <label>🛡️ Dana Darurat</label>
+                    <div class="amount" id="sum-emergency">Rp 0</div>
+                </div>
+                <div class="summary-box saving">
+                    <label>🐷 Tabungan</label>
+                    <div class="amount" id="sum-saving">Rp 0</div>
+                </div>
+                <div class="summary-box sisa">
+                    <label>✨ Sisa Uang</label>
+                    <div class="amount" id="sum-sisa">Rp 0</div>
+                </div>
+            </div>
+
+            <!-- Monthly inputs -->
+            <div class="section-title">📋 Input Bulanan</div>
+            <div class="monthly-inputs">
+                <div class="input-box">
+                    <label>🛡️ Dana Darurat Bulan Ini</label>
+                    <input type="number" id="inp-emergency" placeholder="0" onchange="updateSummary()">
+                </div>
+                <div class="input-box">
+                    <label>🐷 Tabungan Bulan Ini</label>
+                    <input type="number" id="inp-saving" placeholder="0" onchange="updateSummary()">
+                </div>
+            </div>
+
+            <!-- Self Reward & Barang Wajib -->
+            <div class="section-title">🎁 Self Reward & Barang Wajib</div>
+            <div class="reward-barang">
+                <div class="reward-grid">
+                    <div class="reward-box reward">
+                        <label>🎀 Self Reward Bulan Ini</label>
+                        <input type="text" id="inp-reward" placeholder="Apa reward kamu bulan ini?">
+                        <input type="number" id="inp-reward-nominal" placeholder="Nominalnya (Rp)"
+                            style="margin-top:8px" onchange="updateSummary()">
+                    </div>
+                    <div class="reward-box barang">
+                        <label>🛒 1 Barang Wajib Bulan Ini</label>
+                        <input type="text" id="inp-barang" placeholder="Barang apa yang wajib dibeli?">
+                        <input type="number" id="inp-barang-nominal" placeholder="Nominalnya (Rp)"
+                            style="margin-top:8px" onchange="updateSummary()">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Days table -->
+            <div class="section-title days-section">📅 Pemasukan & Pengeluaran Harian</div>
+            <div class="days-table-wrap" id="days-table-wrap"></div>
+
+            <!-- Catatan -->
+            <div class="section-title" style="margin-top:24px">📝 Catatan Bulan Ini</div>
+            <div class="notes-box">
+                <textarea id="inp-notes" placeholder="Tulis catatan, refleksi, atau hal penting bulan ini di sini..."
+                    style="min-height:100px;background:transparent;border:none;padding:0;width:100%;font-size:0.9rem"></textarea>
+            </div>
+
+            <div class="save-area">
+                <button class="btn" onclick="saveMonth()">💾 Simpan Data Bulan Ini</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ====== SCREEN 4: REKAP TAHUNAN ====== -->
+    <div id="screen-rekap" class="screen">
+        <div style="width:100%;max-width:760px;position:relative;z-index:1">
+            <div class="nav-bar">
+                <button class="btn btn-sm btn-outline" onclick="showDashboard()">← Kembali</button>
+                <div class="nav-title">📊 Rekap Tahunan</div>
+                <div class="year-badge" id="rekap-year">2025</div>
+            </div>
+
+            <div class="rekap-card">
+                <div class="section-title">🌸 Perjalanan Keuanganmu Sepanjang Tahun</div>
+                <div id="rekap-list"></div>
+            </div>
+
+            <div class="rekap-total" id="rekap-total-box">
+                <div style="font-size:0.9rem;opacity:0.85;margin-bottom:4px">💰 Total Tabungan + Sisa Seluruh Tahun
+                </div>
+                <div class="big-amount" id="rekap-grand-total">Rp 0</div>
+                <p id="rekap-motivasi-akhir">Luar biasa! Kamu sudah bekerja keras~ 🌸</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const MONTHS = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+        const MONTH_EMOJI = ['❄️', '💝', '🌸', '🌼', '🌻', '☀️', '🌊', '🍃', '🍂', '🎃', '🍁', '🎄'];
+        const MONTH_DAYS = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+        const APPRECIATIONS = [
+            'Luar biasa! Kamu sudah mencatat dengan teliti hari ini 🌸',
+            'Setiap catatan kecil adalah langkah besar menuju impianmu ✨',
+            'Kamu hebat! Konsistensi adalah kunci kebebasan finansial 💪',
+            'Rajin mencatat = masa depan yang lebih cerah! 🌟',
+            'Proud of you! Keuanganmu makin terkontrol 🥰',
+            'Satu per satu, mimpimu semakin dekat 🎯',
+            'Kamu luar biasa! Terus semangat ya! 🌺',
+            'Keuangan sehat = hidup bahagia. Kamu on the right track! 💖',
+        ];
+        const QUOTES_DASH = [
+            '"Uang yang dikelola dengan bijak adalah kebebasan yang sesungguhnya."',
+            '"Mulai dari yang kecil, konsisten, dan mimpimu pasti terwujud."',
+            '"Setiap rupiah yang kamu tabung hari ini adalah hadiah untuk dirimu di masa depan."',
+            '"Kamu tidak perlu kaya untuk mulai menabung, tapi kamu perlu menabung untuk jadi kaya."',
+            '"Financial freedom bukan tentang berapa yang kamu hasilkan, tapi berapa yang kamu simpan."',
+        ];
+
+        let userData = {};
+        let currentYear = new Date().getFullYear();
+        let currentMonthIdx = 0;
+        let monthData = {}; // key: 'YYYY-MM'
+
+        function getKey(y, m) { return `${y}-${String(m + 1).padStart(2, '0')}`; }
+        function getData(y, m) { return monthData[getKey(y, m)] || {}; }
+
+        function formatRp(n) {
+            if (!n || isNaN(n)) return 'Rp 0';
+            return 'Rp ' + Number(n).toLocaleString('id-ID');
+        }
+        function numVal(id) { return parseFloat(document.getElementById(id).value) || 0; }
+        function setVal(id, v) { if (document.getElementById(id)) document.getElementById(id).value = v || ''; }
+
+        function showScreen(id) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+        }
+
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            t.textContent = msg;
+            t.classList.add('show');
+            setTimeout(() => t.classList.remove('show'), 2800);
+        }
+
+        function save() {
+            localStorage.setItem('financeApp_user', JSON.stringify(userData));
+            localStorage.setItem('financeApp_data', JSON.stringify(monthData));
+        }
+        function load() {
+            try { userData = JSON.parse(localStorage.getItem('financeApp_user')) || {}; } catch (e) { userData = {}; }
+            try { monthData = JSON.parse(localStorage.getItem('financeApp_data')) || {}; } catch (e) { monthData = {}; }
+        }
+
+        function startApp() {
+            const nama = document.getElementById('inp-nama').value.trim();
+            const umur = document.getElementById('inp-umur').value.trim();
+            if (!nama) { showToast('Isi nama kamu dulu ya! 🌸'); return; }
+            userData = {
+                nama, umur,
+                goals: document.getElementById('inp-goals').value,
+                motivasi: document.getElementById('inp-motivasi').value,
+            };
+            save();
+            showDashboard();
+        }
+
+        function editProfile() {
+            setVal('inp-nama', userData.nama);
+            setVal('inp-umur', userData.umur);
+            setVal('inp-goals', userData.goals);
+            setVal('inp-motivasi', userData.motivasi);
+            showScreen('screen-onboarding');
+        }
+
+        function showDashboard() {
+            document.getElementById('dash-greeting').textContent = `Hai, ${userData.nama || 'Cantik'}! 🌸`;
+            document.getElementById('dash-year').textContent = currentYear;
+            const q = QUOTES_DASH[Math.floor(Math.random() * QUOTES_DASH.length)];
+            const motiv = userData.motivasi ? `"${userData.motivasi}" 💪` : q;
+            document.getElementById('dash-motivation').textContent = motiv;
+            renderMonthsGrid();
+            showScreen('screen-dashboard');
+        }
+
+        function renderMonthsGrid() {
+            const grid = document.getElementById('months-grid');
+            grid.innerHTML = '';
+            MONTHS.forEach((m, i) => {
+                const d = getData(currentYear, i);
+                const sisa = calcSisa(d);
+                const hasData = !!d && Object.keys(d).length > 0;
+                const el = document.createElement('div');
+                el.className = 'month-card' + (hasData ? ' has-data' : '');
+                el.innerHTML = `
+      <div class="month-emoji">${MONTH_EMOJI[i]}</div>
+      <div class="month-name">${m}</div>
+      ${hasData ? `<div class="month-sisa ${sisa >= 0 ? '' : 'minus'}">${formatRp(sisa)}</div>` : '<div class="month-sisa" style="color:var(--text-light);font-weight:400">Belum ada data</div>'}
+    `;
+                el.onclick = () => openMonth(i);
+                grid.appendChild(el);
+            });
+        }
+
+        function calcSisa(d) {
+            if (!d) return 0;
+            const days = d.days || [];
+            let totalIn = days.reduce((a, c) => a + (c.in || 0), 0) + (d.extraIncome || 0);
+            let totalOut = days.reduce((a, c) => a + (c.out || 0), 0);
+            return totalIn - totalOut - (d.emergency || 0) - (d.saving || 0) - (d.rewardNominal || 0) - (d.barangNominal || 0);
+        }
+
+        function getDaysInMonth(y, m) {
+            // handle leap year
+            if (m === 1) return (y % 4 === 0 && (y % 100 !== 0 || y % 400 === 0)) ? 29 : 28;
+            return MONTH_DAYS[m];
+        }
+
+        function openMonth(mIdx) {
+            currentMonthIdx = mIdx;
+            document.getElementById('month-title').textContent = `${MONTHS[mIdx]} ${currentYear}`;
+            // set appreciation
+            const ap = APPRECIATIONS[Math.floor(Math.random() * APPRECIATIONS.length)];
+            document.getElementById('appreciation-text').textContent = ap;
+            // load existing data
+            const d = getData(currentYear, mIdx);
+            setVal('inp-emergency', d.emergency || '');
+            setVal('inp-saving', d.saving || '');
+            setVal('inp-reward', d.reward || '');
+            setVal('inp-reward-nominal', d.rewardNominal || '');
+            setVal('inp-barang', d.barang || '');
+            setVal('inp-barang-nominal', d.barangNominal || '');
+            setVal('inp-notes', d.notes || '');
+            // build days table
+            buildDaysTable(mIdx, d);
+            updateSummary();
+            showScreen('screen-month');
+        }
+
+        function buildDaysTable(mIdx, d) {
+            const days = getDaysInMonth(currentYear, mIdx);
+            const saved = d.days || [];
+            let html = `<table><thead><tr><th>Tgl</th><th>Pemasukan (Rp)</th><th>Keterangan Masuk</th><th>Pengeluaran (Rp)</th><th>Keterangan Keluar</th><th>Saldo Hari Ini</th></tr></thead><tbody>`;
+            for (let i = 0; i < days; i++) {
+                const sv = saved[i] || {};
+                html += `<tr>
+      <td class="day-num">${i + 1}</td>
+      <td><input class="day-input" type="number" placeholder="0" value="${sv.in || ''}" id="day-in-${i}" onchange="updateSummary()"></td>
+      <td><input class="day-ket" type="text" placeholder="mis. gaji, bonus..." value="${sv.inKet || ''}" id="day-inket-${i}"></td>
+      <td><input class="day-input" type="number" placeholder="0" value="${sv.out || ''}" id="day-out-${i}" onchange="updateSummary()"></td>
+      <td><input class="day-ket" type="text" placeholder="mis. makan, bensin..." value="${sv.outKet || ''}" id="day-outket-${i}"></td>
+      <td id="day-sisa-${i}" class="day-sisa">-</td>
+    </tr>`;
+            }
+            html += '</tbody></table>';
+            document.getElementById('days-table-wrap').innerHTML = html;
+            // recalc saldo harian
+            updateDaySaldos();
+        }
+
+        function updateDaySaldos() {
+            const days = getDaysInMonth(currentYear, currentMonthIdx);
+            let running = 0;
+            for (let i = 0; i < days; i++) {
+                const inc = parseFloat(document.getElementById(`day-in-${i}`)?.value) || 0;
+                const exp = parseFloat(document.getElementById(`day-out-${i}`)?.value) || 0;
+                running += inc - exp;
+                const el = document.getElementById(`day-sisa-${i}`);
+                if (el) {
+                    el.textContent = formatRp(running);
+                    el.className = 'day-sisa ' + (running >= 0 ? 'pos' : 'neg');
+                }
+            }
+        }
+
+        function updateSummary() {
+            const days = getDaysInMonth(currentYear, currentMonthIdx);
+            let totalIn = 0, totalOut = 0;
+            for (let i = 0; i < days; i++) {
+                totalIn += parseFloat(document.getElementById(`day-in-${i}`)?.value) || 0;
+                totalOut += parseFloat(document.getElementById(`day-out-${i}`)?.value) || 0;
+            }
+            const emergency = numVal('inp-emergency');
+            const saving = numVal('inp-saving');
+            const rewardN = numVal('inp-reward-nominal');
+            const barangN = numVal('inp-barang-nominal');
+            const sisa = totalIn - totalOut - emergency - saving - rewardN - barangN;
+            document.getElementById('sum-income').textContent = formatRp(totalIn);
+            document.getElementById('sum-expense').textContent = formatRp(totalOut);
+            document.getElementById('sum-emergency').textContent = formatRp(emergency);
+            document.getElementById('sum-saving').textContent = formatRp(saving);
+            document.getElementById('sum-sisa').textContent = formatRp(sisa);
+            updateDaySaldos();
+        }
+
+        function saveMonth() {
+            const days = getDaysInMonth(currentYear, currentMonthIdx);
+            const daysArr = [];
+            for (let i = 0; i < days; i++) {
+                daysArr.push({
+                    in: parseFloat(document.getElementById(`day-in-${i}`)?.value) || 0,
+                    inKet: document.getElementById(`day-inket-${i}`)?.value || '',
+                    out: parseFloat(document.getElementById(`day-out-${i}`)?.value) || 0,
+                    outKet: document.getElementById(`day-outket-${i}`)?.value || '',
+                });
+            }
+            const key = getKey(currentYear, currentMonthIdx);
+            monthData[key] = {
+                days: daysArr,
+                emergency: numVal('inp-emergency'),
+                saving: numVal('inp-saving'),
+                reward: document.getElementById('inp-reward').value,
+                rewardNominal: numVal('inp-reward-nominal'),
+                barang: document.getElementById('inp-barang').value,
+                barangNominal: numVal('inp-barang-nominal'),
+                notes: document.getElementById('inp-notes').value,
+            };
+            save();
+            showToast(`✨ Data ${MONTHS[currentMonthIdx]} berhasil disimpan!`);
+            updateSummary();
+        }
+
+        function showRekap() {
+            document.getElementById('rekap-year').textContent = currentYear;
+            const list = document.getElementById('rekap-list');
+            list.innerHTML = '';
+            let grandTotal = 0;
+            let activeMonths = 0;
+            MONTHS.forEach((m, i) => {
+                const d = getData(currentYear, i);
+                const hasData = d && Object.keys(d).length > 0;
+                const days = d.days || [];
+                const totalIn = days.reduce((a, c) => a + (c.in || 0), 0);
+                const totalOut = days.reduce((a, c) => a + (c.out || 0), 0);
+                const saving = d.saving || 0;
+                const sisa = calcSisa(d);
+                if (hasData) { grandTotal += saving + (sisa > 0 ? sisa : 0); activeMonths++; }
+                const row = document.createElement('div');
+                row.className = 'rekap-month-row';
+                row.innerHTML = `
+      <div class="rekap-month-name"><span>${MONTH_EMOJI[i]}</span><span>${m}</span></div>
+      ${hasData ? `
+      <div class="rekap-amounts">
+        <span><b style="color:var(--sage)">${formatRp(totalIn)}</b><small>Pemasukan</small></span>
+        <span><b style="color:var(--rose-deep)">${formatRp(totalOut)}</b><small>Pengeluaran</small></span>
+        <span><b style="color:var(--lavender)">${formatRp(saving)}</b><small>Tabungan</small></span>
+        <span><b style="color:var(--rose-deep);font-size:0.9rem">${formatRp(sisa)}</b><small>Sisa</small></span>
+      </div>` : `<span style="color:var(--text-light);font-size:0.82rem">Belum ada data</span>`}
+    `;
+                row.style.cursor = 'pointer';
+                row.onclick = () => openMonth(i);
+                list.appendChild(row);
+            });
+            document.getElementById('rekap-grand-total').textContent = formatRp(grandTotal);
+            const msgs = [
+                'Luar biasa! Kamu sudah konsisten mencatat keuangan! 🌸',
+                'Bangga sama kamu yang mau belajar kelola uang! 💪',
+                'Setiap langkahmu hari ini adalah investasi masa depanmu! ✨',
+                'Terus semangat, masa depan finansialmu cerah! 🌟',
+            ];
+            document.getElementById('rekap-motivasi-akhir').textContent = msgs[Math.floor(Math.random() * msgs.length)];
+            showScreen('screen-rekap');
+        }
+
+        // INIT
+        load();
+        if (userData && userData.nama) {
+            showDashboard();
+        } else {
+            showScreen('screen-onboarding');
+        }
+    </script>
+</body>
+
+</html>
