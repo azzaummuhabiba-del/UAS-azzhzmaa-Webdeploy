@@ -18,7 +18,7 @@ jobs:
         with:
           host: ${{ secrets.VPS_HOST }}       # IP VPS lo (disembunyikan)
           username: ${{ secrets.VPS_USER }}   # Username root (disembunyikan)
-          key: ${{ secrets.VPS_SSH_KEY }}     # SSH Private Key lo (disembunyikan)
+          key: ${{ secrets.VPS_SSH_PASSWORD }} # SSH Privat Key lo (disembunyikan)
           port: 22
           script: |
             
