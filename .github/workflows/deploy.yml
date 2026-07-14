@@ -21,7 +21,7 @@ jobs:
           port: 22
           script: |
            
-            cd ~/UAS-azzaummu-Webdeploy
+            cd ~/UAS-azzhzmaa-Webdeploy
 
             git reset --hard origin/main
             git pull origin main
