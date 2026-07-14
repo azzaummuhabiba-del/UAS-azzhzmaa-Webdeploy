@@ -22,7 +22,7 @@ jobs:
           script: |
            
       
-           cd ~/UAS-azzaummu-Webdeploy
+           cd ~/UAS-azzhzmaa-Webdeploy
            git reset --hard origin/main
            git pull origin main
            docker compose down
