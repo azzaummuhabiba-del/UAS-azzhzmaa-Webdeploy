@@ -21,8 +21,9 @@ jobs:
           port: 22
           script: |
            
-            cd ~/UAS-azzaummu-Webdeploy
-
-            git reset --hard origin/main
-            git pull origin main
-            docker compose up -d --build
+      
+           cd ~/UAS-azzaummu-Webdeploy
+           git reset --hard origin/main
+           git pull origin main
+           docker compose down
+           docker compose up -d
